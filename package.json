@@ -62,17 +62,24 @@
   },
   "dependencies": {
     "antd": "^2.13.9",
+    "axios": "^0.17.0",
     "babel-plugin-import": "^1.6.2",
     "core-js": "^2.0.0",
     "history": "^4.7.2",
     "less-loader": "^4.0.5",
+    "node-sass": "^4.6.0",
     "normalize.css": "^4.0.0",
-    "react": "^15.0.0",
+    "prop-types": "^15.6.0",
+    "query-string": "^5.0.1",
+    "react": "^15.6.2",
+    "react-create-class": "^1.0.0",
     "react-dom": "^15.0.0",
+    "react-helmet": "^5.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "sass-loader": "^6.0.6"
   }
 }
