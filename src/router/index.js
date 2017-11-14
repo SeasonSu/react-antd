@@ -11,11 +11,11 @@ import {
      routerMiddleware
 } from 'react-router-redux'
 import ReactRouters from './router'
-// import reducers from './reducers'
+ // import reducers from './reducers'
 const history = createHistory()
 const middleware = routerMiddleware(history)
 const store = createStore(
-//    ...reducers,
+    // ...reducers,
     combineReducers({
         router: routerReducer
     }),

@@ -15,14 +15,12 @@ class NotFound extends React.Component {
   //   console.log(this.props)
   // }
   componentDidMount(){
-        console.log(this)
         this.setState({
             showLoader:'true'
         })
 　　　//   this.props.handlerNotFound('aa');
 　　 }
   render() {
-      console.log()
     return (
       <div className="notFound">
         <Card>

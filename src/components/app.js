@@ -1,24 +1,19 @@
 require('normalize.css/normalize.css');
-require('styles/App.css');
-import '../themes/index.scss'
+import '../styles/app.scss';
+import '../themes/default.less'
+import './Layout/style/Layout.less'
+import '../themes/index.less'
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Helmet } from 'react-helmet';
-// import queryString from 'query-string'
+import { Helmet } from 'react-helmet'
 import {
-    Header,
-    Menu
+    Main
 } from './Layout'
-// const search = queryString.parse(location.search)
-
-// import NotFound from '../components/NotFound';
+import queryString from 'query-string'
+const params = queryString.parse(location.search)
 
 class App extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     console.log(search)
-    //     console.log(this.props)
-    //     //this.admin = search.name == 'nd' ? true : false
+
     constructor(props, context) {
      super(props, context)
      this.store = props.store;
@@ -38,7 +33,6 @@ class App extends React.Component {
        };
      }
     render() {
-        console.info(this)
         //    console.log(this.props)
         return (
             <div className="application">
@@ -46,9 +40,7 @@ class App extends React.Component {
                     <title>ANTD </title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 </Helmet>
-                <Header toParent={this.getChildInfo.bind(this)} />
-                <Menu />
-                {this.props.children}
+                {params.name=='nd'?this.props.children:<Main children={this.props.children}/>}
             </div>
         )
 

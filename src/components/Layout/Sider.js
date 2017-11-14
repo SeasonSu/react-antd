@@ -1,58 +1,23 @@
-import React from 'react';
-import { Layout, Menu, Icon } from 'antd';
-const { Header, Sider, Content } = Layout;
+import React from 'react'
+import Menu from './Menu'
 
-class SiderDemo extends React.Component {
-  state = {
-    collapsed: false
-  };
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
+class SiderComp extends React.Component {
+
   render() {
     return (
-      <Layout>
-        <Sider
-          trigger={null}
-          collapsible
-          collapsed={this.state.collapsed}
-        >
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
-            </Menu.Item>
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <Icon
-              className="trigger"
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.toggle}
-            />
-          </Header>
-          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            Content
-          </Content>
-        </Layout>
-      </Layout>
+    <div>
+        <div className="logo">
+            <img alt={'logo'} src="/logo.png" />
+            {this.props.siderFold ? '' : <span>ANTD ADMIN</span>}
+        </div>
+        <Menu  />
+        {!this.props.siderFold ? <div className="switchtheme"></div> : ''}
+    </div>
     );
   }
 }
 
-SiderDemo.defaultProps = {
+SiderComp.defaultProps = {
 };
 
-export default SiderDemo;
+export default SiderComp;

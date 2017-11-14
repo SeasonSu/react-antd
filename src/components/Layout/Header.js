@@ -1,19 +1,34 @@
  import React from 'react';
-// import { Layout, Menu, Icon } from 'antd';
-// const { Header, Sider, Content } = Layout;
+ import classnames from 'classnames'
+ import './style/Header.less'
+ import { Menu, Icon } from 'antd'
+ const SubMenu = Menu.SubMenu
 
 class Header extends React.Component {
     constructor(props){
         super(props)
     }
-    componentDidMount(){
-//         console.log('11111')
-// 　　　   this.props.toParent('aa');
-　　 }
+    handleClickMenu = () => {
+        console.log('1')
+    }
     render() {
         return (
-            <div className='header'>
-                header
+            <div className="header">
+               <div className="button">
+                  <Icon type={classnames({ 'menu-unfold': this.props.siderFold, 'menu-fold': !this.props.siderFold })} />
+                </div>
+              <div className="rightWarpper">
+                <div className="button">
+                  <Icon type="mail" />
+                </div>
+                <Menu mode="horizontal" onClick={() => this.handleClickMenu()}>
+                  <SubMenu  style={{float: 'right'}} title={<span><Icon type="user"/>123</span>}>
+                    <Menu.Item key="logout">
+                      Sign out
+                    </Menu.Item>
+                  </SubMenu>
+                </Menu>
+              </div>
             </div>
         )
     }
