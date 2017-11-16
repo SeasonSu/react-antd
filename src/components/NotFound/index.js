@@ -3,24 +3,12 @@ import { Card } from 'antd';
 import './index.scss';
 import PropTypes from 'prop-types'
 class NotFound extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //
-  // }
-  //
-  // componentDidMount() {
-  //   const { store } = this.context;
-  //   console.log('````')
-  //   console.log(store)
-  //   console.log(this.props)
-  // }
-  componentDidMount(){
-        this.setState({
-            showLoader:'true'
-        })
-　　　//   this.props.handlerNotFound('aa');
-　　 }
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+
     return (
       <div className="notFound">
         <Card>
@@ -32,11 +20,11 @@ class NotFound extends React.Component {
   }
 }
 
-NotFound.ContextType = {
-    showLoader:PropTypes.string
-}
+NotFound.contextTypes = {
+    ShowLoader: PropTypes.string,
+    store: PropTypes.object,
+    value: PropTypes.string
+};
 
-// NotFound.defaultProps = {
-// };
 
 export default NotFound;

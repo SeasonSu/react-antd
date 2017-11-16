@@ -1,20 +1,21 @@
 import React from 'react'
 import Menu from './Menu'
+import {config} from '../../utils'
 
 class SiderComp extends React.Component {
-
-  render() {
-    return (
-    <div>
-        <div className="logo">
-            <img alt={'logo'} src="/logo.png" />
-            {this.props.siderFold ? '' : <span>ANTD ADMIN</span>}
-        </div>
-        <Menu  />
-        {!this.props.siderFold ? <div className="switchtheme"></div> : ''}
-    </div>
-    );
-  }
+    constructor(props){
+        super(props)
+    }
+    render() {
+        return (
+            <div>
+                <div className="logo">
+                    <img alt={'logo'} src={config.logo} />
+                </div>
+                <Menu {...this.props}/>
+            </div>
+        );
+    }
 }
 
 SiderComp.defaultProps = {

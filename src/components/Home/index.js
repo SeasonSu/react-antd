@@ -1,31 +1,24 @@
 import './index.scss'
-import React from 'react';
-import { connect } from 'react-redux'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 class Home extends React.Component {
-    constructor(pros){
-        super(pros)
+    constructor(props){
+        super(props)
     }
-    componentDidMount() {
-    const { store } = this.context;
-    console.log(store)
-  }
- render() {
-   return (
-      <div className='Home'>
-        home
-      </div>
-   )
- }
+    render() {
+        return (
+            <div className='Home'>
+                home
+            </div>
+        )
+    }
 }
 
-const mapStoreStateToProps = (state) => ({
-  dispatch: state.dispatch
-});
-
-Home.PropTypes = {
-    dispatch:PropTypes.func
+Home.contextTypes = {
+    ShowLoader: PropTypes.string,
+    store: PropTypes.object,
+    value: PropTypes.string
 };
 
-export default connect(mapStoreStateToProps)(Home)
+export default Home;
