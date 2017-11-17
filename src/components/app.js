@@ -6,14 +6,15 @@ import '../themes/index.less'
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
-import {Sider,Header} from './Layout'
+import {Sider,Header,Bread} from './Layout'
 import {config,session} from '../utils'
 
 class App extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            isMenuFold:false
+            isMenuFold:false,
+            isNavbar:document.body.clientWidth < 769
         }
     }
     getChildContext() {
@@ -37,6 +38,7 @@ class App extends React.Component {
         })
         var headerProps = {
             ...this.props,
+            isNavbar:this.state.isNavbar,
             handlerMenuFold(isMenuFold){
                 _this.setState({
                     isMenuFold:!isMenuFold
@@ -47,6 +49,11 @@ class App extends React.Component {
             ...this.props,
             isMenuFold:this.state.isMenuFold
         }
+        window.onresize = () => {
+            _this.setState({
+                isNavbar:document.body.clientWidth < 769
+            })
+        }
         return (
             <div className="application">
                 <Helmet>
@@ -56,12 +63,18 @@ class App extends React.Component {
                 {
                     !isLogin ? this.props.children :
                     (
-                        <div className={`layout ${this.state.isMenuFold?'fold':''}`}>
-                            <div className="sider light">
-                                <Sider {...SiderProps}/>
-                            </div>
+                        <div className={`layout ${this.state.isMenuFold?'fold':''} ${this.state.isNavbar?'withnavbar':''}`}>
+                            {   !this.state.isNavbar ?
+                                (<div className="sider light">
+                                    <Sider {...SiderProps}/>
+                                </div>)
+                                :(
+                                    <div></div>
+                                )
+                            }
                             <div className="main">
                                 <Header {...headerProps}/>
+                                <Bread {...this.props}/>
                                 <div className="container">
                                     <div className="content">
                                     {children}

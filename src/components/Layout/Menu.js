@@ -8,20 +8,20 @@ class MenuComponent extends React.Component {
         _props = this.props
     }
     handleClick({key}){
+        console.log(key)
         var _link = ''
-        MenuList.map((item)=>{
-            if(item.subMenu){
-                item.subMenu.map((subItem) => {
-                    if(subItem.key == key){
-                        _link = subItem.to
+        const checkLink = (menusArray) => {
+            menusArray.map((item) => {
+                if(item.subMenu){
+                    checkLink(item.subMenu)
+                }else{
+                    if(item.key == key){
+                        _link = item.to
                     }
-                })
-            }else{
-                if(item.key == key){
-                    _link = item.to
                 }
-            }
-        })
+            })
+        }
+        checkLink(MenuList)
         if(_link == _props.history.location.pathname){
             return
         }
@@ -29,45 +29,46 @@ class MenuComponent extends React.Component {
     }
     render() {
         // 默认展开，默认选择菜单
-        let defaultMenu = ['1']
-        let defaultOpen = ['0']
-        const Menus = MenuList.map((item,index) => {
-            item.key = index.toString()
-            if(!item.subMenu){
-                if(item.to == this.props.history.location.pathname){
-                    defaultMenu = [`${index}`]
-                }
-                return (
-                    <Menu.Item key={index} >
-                        <Icon type={item.icon} />
-                        <span>{item.name}</span>
-                    </Menu.Item>
-                )
-            }else{
-                const subMenus = item.subMenu.map((subItem,subIndex) => {
-                    subItem.key = subIndex = index.toString() + subIndex
-                    if(subItem.to == this.props.history.location.pathname){
-                        defaultMenu = [`${subIndex}`]
-                        defaultOpen = [`${index}`]
+        var defaultMenu = ['1']
+        var defaultOpen = ['0']
+        var tempOpen = []
+        const getMenusDom = (MenusArray,MenusKey) => (
+            MenusArray.map((item,index) => {
+                item.key = MenusKey ? MenusKey + index.toString() : index.toString()
+                if(item.subMenu){
+                    tempOpen.push(item.key)
+                    return (
+                        <Menu.SubMenu
+                            title={
+                                <span>
+                                    <Icon type={item.icon}/>
+                                    <span>{(!this.props.isMenuFold || MenusKey) && item.name}</span>
+                                </span>
+                            }
+                            key={item.key}
+                        >
+                            {getMenusDom(item.subMenu,item.key)}
+                        </Menu.SubMenu>
+                    )
+                }else{
+                    if(item.to == this.props.history.location.pathname){
+                        defaultMenu = [`${item.key}`]
+                        defaultOpen = MenusKey ? tempOpen : ['0']
                     }
                     return (
-                        <Menu.Item key={subIndex} >
-                            <Icon type={subItem.icon} />
-                            <span>{subItem.name}</span>
-                       </Menu.Item>
+                        <Menu.Item key={item.key} >
+                            <Icon type={item.icon} />
+                            <span>{(!this.props.isMenuFold || MenusKey) && item.name}</span>
+                        </Menu.Item>
                     )
-                })
-                return (
-                    <Menu.SubMenu title={item.title} key={index}>
-                        {subMenus}
-                     </Menu.SubMenu>
-                )
-            }
-        })
+                }
+            })
+        )
+        const MenusEle = getMenusDom(MenuList)
         return (
             <div className='Menu'>
                 <Menu
-                    inlineCollapsed={this.props.isMenuFold}
+
                     theme="light"
                     mode={this.props.isMenuFold ? 'vertical' : 'inline'}
                     props={this.props}
@@ -75,7 +76,7 @@ class MenuComponent extends React.Component {
                     defaultOpenKeys={defaultOpen}
                     onClick={this.handleClick}
                 >
-                    {Menus}
+                    {MenusEle}
                 </Menu>
             </div>
         )

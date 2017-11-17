@@ -1,8 +1,9 @@
 import React from 'react';
 import classnames from 'classnames'
 import './style/Header.less'
-import { Menu, Icon } from 'antd'
+import { Menu, Icon ,Popover} from 'antd'
 import {config,session} from '../../utils'
+import MenuComp from './Menu'
 
 class Header extends React.Component {
     constructor(props){
@@ -24,9 +25,20 @@ class Header extends React.Component {
     render() {
         return (
             <div className="header">
-                <div className="button" onClick={()=>this.handleMenu()}>
-                    <Icon type={classnames({'menu-unfold':this.state.siderFold,'menu-fold':!this.state.siderFold })} />
-                </div>
+                {   this.props.isNavbar?(
+                        <Popover placement="bottomLeft" overlayClassName="popovermenu" trigger="click"  content={<MenuComp {...this.props}/>}>
+                          <div className="button">
+                            <Icon type="bars" />
+                          </div>
+                        </Popover>
+                    ):(
+                        <div className="button" onClick={()=>this.handleMenu()}>
+                            <Icon type={classnames({'menu-unfold':this.state.siderFold,'menu-fold':!this.state.siderFold })} />
+                        </div>
+                    )
+
+                }
+
                 <div className="rightWarpper">
                     <div className="button">
                         <Icon type="mail" />

@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
-import {config} from '../../utils'
-
+// import {config} from '../../utils'
+//<img alt={'logo'} src={config.logo} />
 class SiderComp extends React.Component {
     constructor(props){
         super(props)
@@ -10,7 +10,8 @@ class SiderComp extends React.Component {
         return (
             <div>
                 <div className="logo">
-                    <img alt={'logo'} src={config.logo} />
+
+                    logo
                 </div>
                 <Menu {...this.props}/>
             </div>

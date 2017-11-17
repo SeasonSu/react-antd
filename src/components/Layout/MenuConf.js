@@ -2,23 +2,27 @@ const MenuList  = [
     {
         icon:'user',
         to:'/',
-        name:'home'
+        name:'主页'
     },
     {
         icon:'home',
         to:'/table',
-        name:'table'
+        name:'表格'
     },
     {
         icon:'user',
-        to:'/404',
         name:'home',
-        title:'lala',
         subMenu:[
             {
                 icon:'user',
-                to:'/404',
-                name:'404'
+                name:'404',
+                subMenu:[
+                    {
+                        icon:'user',
+                        to:'/404',
+                        name:'last'
+                    }
+                ]
             }
         ]
     }
