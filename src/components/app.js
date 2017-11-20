@@ -61,7 +61,15 @@ class App extends React.Component {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 </Helmet>
                 {
-                    !isLogin ? this.props.children :
+                    !isLogin ? (
+                        <div className="container">
+                            <div className="content">
+                                <div className="contentInner">
+                                    {children}
+                                </div>
+                            </div>
+                        </div>
+                    ):
                     (
                         <div className={`layout ${this.state.isMenuFold?'fold':''} ${this.state.isNavbar?'withnavbar':''}`}>
                             {   !this.state.isNavbar ?
@@ -77,7 +85,9 @@ class App extends React.Component {
                                 <Bread {...this.props}/>
                                 <div className="container">
                                     <div className="content">
-                                    {children}
+                                        <div className="contentInner">
+                                            {children}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -25,7 +25,8 @@ class Header extends React.Component {
     render() {
         return (
             <div className="header">
-                {   this.props.isNavbar?(
+                {   this.props.isNavbar ?
+                    (
                         <Popover placement="bottomLeft" overlayClassName="popovermenu" trigger="click"  content={<MenuComp {...this.props}/>}>
                           <div className="button">
                             <Icon type="bars" />
@@ -36,9 +37,7 @@ class Header extends React.Component {
                             <Icon type={classnames({'menu-unfold':this.state.siderFold,'menu-fold':!this.state.siderFold })} />
                         </div>
                     )
-
                 }
-
                 <div className="rightWarpper">
                     <div className="button">
                         <Icon type="mail" />

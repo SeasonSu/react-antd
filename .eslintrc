@@ -17,6 +17,10 @@
     "node": true,
     "mocha": true
   },
+  "globals":{
+      "XLSX":true,
+      "saveAs":true,
+  },
   "rules": {
     "comma-dangle": 1,
     "quotes": [ 1, "single" ],

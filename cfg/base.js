@@ -39,5 +39,8 @@ module.exports = {
       'react/lib/ReactMount': 'react-dom/lib/ReactMount'
     }
   },
-  module: {}
+  module: {},
+  externals: {
+    XLSX: "script-loader!xlsx/dist/xlsx.core.min"
+  }
 };

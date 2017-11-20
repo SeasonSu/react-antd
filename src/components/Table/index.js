@@ -1,77 +1,113 @@
 import React from 'react';
-import { Table, Icon } from 'antd';
+import { Table,Button } from 'antd';
+import reqwest from 'reqwest'
+import './index.scss'
+import {ExportJsonExcel} from '../../utils'
 
-const { Column, ColumnGroup } = Table;
+var option={};
 
-const data = [{
-  key: '1',
-  firstName: 'John',
-  lastName: 'Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park'
+option.fileName = 'excel'
+option.datas=[
+  {
+    sheetData:[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}],
+    sheetName:'sheet',
+    sheetFilter:['two','one'],
+    sheetHeader:['第一列','第二列']
+  },
+  {
+    sheetData:[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}]
+  }
+];
+
+const columns = [{
+  title: 'Name',
+  dataIndex: 'name',
+  sorter: true,
+  render: name => `${name.first} ${name.last}`,
+  width: '20%'
 }, {
-  key: '2',
-  firstName: 'Jim',
-  lastName: 'Green',
-  age: 42,
-  address: 'London No. 1 Lake Park'
+  title: 'Gender',
+  dataIndex: 'gender',
+  filters: [
+    { text: 'Male', value: 'male' },
+    { text: 'Female', value: 'female' }
+  ],
+  width: '20%'
 }, {
-  key: '3',
-  firstName: 'Joe',
-  lastName: 'Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park'
+  title: 'Email',
+  dataIndex: 'email'
 }];
 
 class TableComp extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-
-    return (
-        <Table dataSource={data}>
-          <ColumnGroup title="Name">
-            <Column
-              title="First Name"
-              dataIndex="firstName"
-              key="firstName"
-            />
-            <Column
-              title="Last Name"
-              dataIndex="lastName"
-              key="lastName"
-            />
-          </ColumnGroup>
-          <Column
-            title="Age"
-            dataIndex="age"
-            key="age"
-          />
-          <Column
-            title="Address"
-            dataIndex="address"
-            key="address"
-          />
-          <Column
-            title="Action"
-            key="action"
-            render={(text, record) => (
-              <span>
-                <a href="#">Action 一 {record.name}</a>
-                <span className="ant-divider" />
-                <a href="#">Delete</a>
-                <span className="ant-divider" />
-                <a href="#" className="ant-dropdown-link">
-                  More actions <Icon type="down" />
-                </a>
-              </span>
-            )}
-          />
-        </Table>
-    )
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            pagination: {},
+            loading: false
+        }
+    }
+    handleTableChange = (pagination, filters, sorter) => {
+        const pager = { ...this.state.pagination };
+        pager.current = pagination.current;
+        this.setState({
+            pagination: pager
+        });
+        this.fetch({
+            results: pagination.pageSize,
+            page: pagination.current,
+            sortField: sorter.field,
+            sortOrder: sorter.order,
+            ...filters
+        });
+    }
+    fetch = (params = {}) => {
+        console.log('params:', params);
+        this.setState({ loading: true });
+        reqwest({
+            url: 'https://randomuser.me/api',
+            method: 'get',
+            data: {
+                results: 10,
+                ...params
+            },
+            type: 'json'
+        }).then((data) => {
+            const pagination = { ...this.state.pagination };
+            // Read total count from server
+            // pagination.total = data.totalCount;
+            pagination.total = 200;
+            this.setState({
+                loading: false,
+                data: data.results,
+                pagination
+            });
+        });
+    }
+    exportExcel(){
+        var toExcel = new ExportJsonExcel(option); //new
+        toExcel.saveExcel(); //保存
+    }
+    componentDidMount() {
+        this.fetch();
+    }
+    render() {
+        return (
+            <div className="tableBox">
+                <div className="control">
+                    <Button onClick={this.exportExcel}>导出EXCEL</Button>
+                </div>
+                <Table columns={columns}
+                rowKey={record => record.registered}
+                dataSource={this.state.data}
+                pagination={this.state.pagination}
+                loading={this.state.loading}
+                bordered
+                onChange={this.handleTableChange}
+                />
+            </div>
+        );
+    }
 }
 
 export default TableComp
