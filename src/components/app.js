@@ -1,8 +1,8 @@
 require('normalize.css/normalize.css');
 import '../styles/app.scss';
-import '../themes/default.less'
+import 'themes/default.less'
 import './Layout/style/Layout.less'
-import '../themes/index.less'
+import 'themes/index.less'
 import React from 'react';
 // import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
@@ -94,8 +94,5 @@ class App extends React.Component {
         )
     }
 }
-
-
-
 
 export default App;

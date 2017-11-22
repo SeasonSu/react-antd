@@ -1,8 +1,3 @@
-
-const initialState = {
-    count:1
-}
-
 export const ADD_COUNT = 'ADD_COUNT'
 
 export function addCount(){
@@ -11,7 +6,7 @@ export function addCount(){
     }
 }
 
-export function count(state = initialState.count, action) {
+export function count(state = 0, action) {
     console.log('111111111')
     switch (action.type) {
         case ADD_COUNT :

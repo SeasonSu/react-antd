@@ -28,19 +28,25 @@ module.exports = {
     noInfo: false
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx','less','scss'],
     alias: {
+      rootPath:`${defaultSettings.srcPath}`,
       actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,
+      reducers: `${defaultSettings.srcPath}/reducers/`,
+      router: `${defaultSettings.srcPath}/router/`,
       sources: `${defaultSettings.srcPath}/sources/`,
       stores: `${defaultSettings.srcPath}/stores/`,
       styles: `${defaultSettings.srcPath}/styles/`,
+      themes: `${defaultSettings.srcPath}/themes/`,
+      utils: `${defaultSettings.srcPath}/utils/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV,
       'react/lib/ReactMount': 'react-dom/lib/ReactMount'
     }
   },
-  module: {},
-  externals: {
-    XLSX: "script-loader!xlsx/dist/xlsx.core.min"
-  }
+  module: {
+      noparse:{
+
+      }
+  },
 };
