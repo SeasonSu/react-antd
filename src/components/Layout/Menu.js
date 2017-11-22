@@ -68,7 +68,6 @@ class MenuComponent extends React.Component {
         return (
             <div className='Menu'>
                 <Menu
-
                     theme="light"
                     mode={this.props.isMenuFold ? 'vertical' : 'inline'}
                     props={this.props}

@@ -1,31 +1,9 @@
 import React from 'react';
 import createHistory from 'history/createHashHistory'
-import {
-    createStore,
-    combineReducers,
-    applyMiddleware
-} from 'redux'
-import {
-    routerReducer,
-     routerMiddleware
-} from 'react-router-redux'
-import ReactRouters from './reactRouter'
- // import reducers from './reducers'
+import ReactRouters from './router'
+import configureStore from '../store'
 const history = createHistory()
-const middleware = routerMiddleware(history)
-const store = createStore(
-    // ...reducers,
-    combineReducers({
-        router: routerReducer
-    }),
-    applyMiddleware(middleware)
-)
-if (module.hot) {
-    module.hot.accept('./reducers', () => {
-        const nextRootReducer = require('./reducers');
-        store.replaceReducer(nextRootReducer);
-    });
-}
+const store = configureStore()
 
 class Routers extends React.Component {
     constructor(props){

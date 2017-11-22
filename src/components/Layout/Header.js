@@ -12,15 +12,17 @@ class Header extends React.Component {
             siderFold:false
         }
     }
-    handleClickMenu = () => {
-        session.remove(config.sessionKey.userInfo)
-        this.props.history.push('./login')
-    }
-    handleMenu = () => {
-        this.setState({
-            siderFold:!this.state.siderFold
-        })
-        this.props.handlerMenuFold(this.state.siderFold)
+    componentWillMount(){
+        this.handleClickMenu = () => {
+            session.remove(config.sessionKey.userInfo)
+            this.props.history.push('./login')
+        }
+        this.handleMenu = () => {
+            this.setState({
+                siderFold:!this.state.siderFold
+            })
+            this.props.handlerMenuFold(this.state.siderFold)
+        }
     }
     render() {
         return (

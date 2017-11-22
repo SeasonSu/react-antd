@@ -3,7 +3,7 @@ import { Table,Button } from 'antd';
 import reqwest from 'reqwest'
 import './index.scss'
 import {ExportJsonExcel} from '../../utils'
-
+// const ExportJsonExcel = require('js-export-excel')
 var option={};
 
 option.fileName = 'excel'

@@ -21,7 +21,15 @@ let config = Object.assign({}, baseConfig, {
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin(
+        // {
+        //     compress:{
+        //         warnings:false,
+        //         drop_debugger:true,
+        //         drop_console:true
+        //     }
+        // }
+    ),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin()
@@ -35,7 +43,8 @@ config.module.loaders.push({
   loader: 'babel',
   include: [].concat(
     config.additionalPaths,
-    [ path.join(__dirname, '/../src') ]
+    [ path.join(__dirname, '/../src')
+    ]
   )
 });
 

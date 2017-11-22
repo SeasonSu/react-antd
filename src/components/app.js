@@ -4,7 +4,7 @@ import '../themes/default.less'
 import './Layout/style/Layout.less'
 import '../themes/index.less'
 import React from 'react';
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import {Sider,Header,Bread} from './Layout'
 import {config,session} from '../utils'
@@ -17,13 +17,7 @@ class App extends React.Component {
             isNavbar:document.body.clientWidth < 769
         }
     }
-    getChildContext() {
-        return {
-          store: this.props.store,
-          value:'1212',
-          ShowLoader:'11'
-        }
-    }
+
     render() {
         var _this = this
         var isLogin = session.has(config.sessionKey.userInfo)
@@ -61,7 +55,9 @@ class App extends React.Component {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 </Helmet>
                 {
-                    !isLogin ? (
+                    !isLogin
+                    ?
+                    (
                         <div className="container">
                             <div className="content">
                                 <div className="contentInner">
@@ -99,11 +95,7 @@ class App extends React.Component {
     }
 }
 
-App.childContextTypes = {
-    ShowLoader: PropTypes.string,
-    store: PropTypes.object,
-    value: PropTypes.string
-};
+
 
 
 export default App;

@@ -1,24 +1,20 @@
-import Home from '../components/Home'
-import NotFound from '../components/NotFound'
-import Table from '../components/Table/index'
-import Login from '../components/Login/index'
-const routersConf = [
+const routers = [
     {
         path:'/',
-        component:Home
+        component:require('../components/Home').default
     },
     {
         path:'/table',
-        component:Table
+        component:require('../components/Table').default
     },
     {
         path:'/login',
-        component:Login
+        component:require('../components/Login').default
     },
     {
         path:'*',
-        component:NotFound
+        component:require('../components/NotFound').default
     }
 ]
 
-export default routersConf
+export default routers
