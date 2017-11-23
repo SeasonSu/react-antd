@@ -1,13 +1,13 @@
 require('normalize.css/normalize.css');
-import '../styles/app.scss';
+import 'styles/app.scss';
 import 'themes/default.less'
-import './Layout/style/Layout.less'
+import './styles/Layout.less'
 import 'themes/index.less'
 import React from 'react';
-// import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
-import {Sider,Header,Bread} from './Layout'
-import {config,session} from '../utils'
+import {Sider,Header,Bread} from './components'
+import {config,session} from 'utils'
+import PropTypes from 'prop-types'
 
 class App extends React.Component {
     constructor(props){
@@ -21,10 +21,11 @@ class App extends React.Component {
     render() {
         var _this = this
         var isLogin = session.has(config.sessionKey.userInfo)
-        if(this.props.history.location.pathname == '/login'){
-            session.remove(config.sessionKey.userInfo)
-            isLogin = false
-        }
+        console.log(this)
+        // if(this.props.history.location.pathname == '/login'){
+        //     session.remove(config.sessionKey.userInfo)
+        //     isLogin = false
+        // }
         var children = React.Children.map(this.props.children, function (child) {
             return React.cloneElement(child, {
                 foo: 'sasasas'
@@ -94,5 +95,10 @@ class App extends React.Component {
         )
     }
 }
+
+App.contextTypes = {
+    store: PropTypes.object
+};
+
 
 export default App;

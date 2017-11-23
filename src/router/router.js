@@ -5,7 +5,7 @@ import {
   Switch
 } from 'react-router-dom';
 import { Provider } from 'react-redux'
-import App from '../components/app';
+import App from '../components/Main';
 import routersConf from './config'
 
 class ReactRouters extends React.Component {
@@ -20,7 +20,7 @@ class ReactRouters extends React.Component {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    <App store={store} history={history}>
+                    <App history={history}>
                         <Switch>
                             {routers}
                         </Switch>

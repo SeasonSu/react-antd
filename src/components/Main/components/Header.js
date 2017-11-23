@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames'
-import './style/Header.less'
+import '../styles/Header.less'
 import { Menu, Icon ,Popover} from 'antd'
-import {config,session} from '../../utils'
+import {config,session} from 'utils'
 import MenuComp from './Menu'
 
 class Header extends React.Component {

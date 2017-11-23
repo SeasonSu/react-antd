@@ -1,6 +1,6 @@
 import React from 'react'
 import {Breadcrumb , Icon} from 'antd'
-import './style/Bread.less'
+import '../styles/Bread.less'
 import Menus from './MenuConf'
 
 class Bread extends React.Component {
