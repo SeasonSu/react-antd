@@ -8,7 +8,6 @@ class MenuComponent extends React.Component {
         _props = this.props
     }
     handleClick({key}){
-        console.log(key)
         var _link = ''
         const checkLink = (menusArray) => {
             menusArray.map((item) => {

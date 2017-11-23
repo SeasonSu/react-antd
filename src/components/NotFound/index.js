@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card } from 'antd';
 import './index.scss';
 import PropTypes from 'prop-types'
-import {addCount} from '../../reducers/count'
+import {addCount} from 'reducers/count'
 class NotFound extends React.Component {
     constructor(props) {
         super(props);

@@ -21,11 +21,11 @@ class App extends React.Component {
     render() {
         var _this = this
         var isLogin = session.has(config.sessionKey.userInfo)
-        console.log(this)
-        // if(this.props.history.location.pathname == '/login'){
-        //     session.remove(config.sessionKey.userInfo)
-        //     isLogin = false
-        // }
+    
+        if(this.props.history.location.pathname == '/login'){
+            session.remove(config.sessionKey.userInfo)
+            isLogin = false
+        }
         var children = React.Children.map(this.props.children, function (child) {
             return React.cloneElement(child, {
                 foo: 'sasasas'

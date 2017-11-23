@@ -1,7 +1,7 @@
 import './index.scss'
 import React from 'react';
 import { Button, Row, Form, Input,message } from 'antd'
-import {config,session} from '../../utils'
+import {config,session} from 'utils'
 const FormItem = Form.Item
 
 const handleOk = (_this) => {

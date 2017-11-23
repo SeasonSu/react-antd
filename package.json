@@ -76,6 +76,7 @@
     "prop-types": "^15.6.0",
     "query-string": "^5.0.1",
     "react": "^15.6.2",
+    "react-addons-perf": "^15.4.2",
     "react-create-class": "^1.0.0",
     "react-dom": "^15.0.0",
     "react-helmet": "^5.2.0",
